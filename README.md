@@ -15,11 +15,29 @@ The structure of the final EEG data was comprised of a total of 12 patients, wit
 
 A moving window is used on the EEG time-series data to extract the relevant features sequentially. For each window, a total of 6 features were computed for the time-series data. These include:
 
-* The original time-series data
+* The original time-series data (384 samples)
 * Power per each frequency band
 * Area 
 * Energy
 * Number of Zero-Crossings
 * Line Length
+
+Therefore, for each 384 sample window, the end-result training matrix consisted of 64 rows (one per EEG input channel) and 390 columns, corresponding to the features listed above.
+
+Thereafter, a principal component analysis was executed to reduce the dimensionality of the data with regards to the number of channels being used. It was reduced to its 3 main principal components, which in total explained over 99% of the original variance of the dataset. In this manner, training was performed only on the channel combinations that contain the most information with regards to predicting the song waveform.
+
+In this sliding window approach, the features along with their corresponding output (a point on the original song waveform) were passed through a deep neural net for training. The DNN consists of 9 hidden layers with 50 neurons per layer and hyperbolic tangent activation functions.
+
+
+## Results
+
+The results and predictions of the algorithm can be seen in the presentation file found in the repository. The predictions are not extremely accurate but some underlying waveform patterns from the original song audio can be traced in the prediction waveforms.
+
+## Conclusion 
+
+Original EEG data was preprocessed by getting rid of faulty channels and filtering the time-series data in order to get rid of faulty artifacts. Thereafter, the features to be used were engineered and calculated in a moving window approach across the EEG time-series data. As the features were iteratively calculated, they were then fed into a DNN regression model to be trained. 
+
+This trained model was then used to reconstruct the audio from the EEG testing set.
+
 
 
