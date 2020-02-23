@@ -11,5 +11,15 @@ A special thanks to Sebastian Stober, Head of Machine Learning in Cognitive Scie
 
 The structure of the final EEG data was comprised of a total of 12 patients, with 12 songs each, and a total of 540 trials. Each trial resulted in an EEG recording of 6.87 seconds in length with a sampling frequency of 512 Hz. This leads to a total of 3,518 samples per trial.
 
-## Training
+## Training and Feature Selection
+
+A moving window is used on the EEG time-series data to extract the relevant features sequentially. For each window, a total of 6 features were computed for the time-series data. These include:
+
+* The original time-series data
+* Power per each frequency band
+* Area 
+* Energy
+* Number of Zero-Crossings
+* Line Length
+
 
